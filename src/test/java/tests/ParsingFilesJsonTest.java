@@ -12,7 +12,7 @@ public class ParsingFilesJsonTest {
     private final ClassLoader cl = ParsingFilesJsonTest.class.getClassLoader();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @DisplayName("Проверяем файл Clients.json")
+    @DisplayName("Проверка файла Clients.json")
     @Test
     void parseJsonWithJackson() throws Exception {
         try (InputStream is = cl.getResourceAsStream("Clients.json")) {

@@ -50,6 +50,7 @@ public class ParsingFilesTest {
                 .isTrue();
     }
 
+    @DisplayName("Проверка excel-файла из ZIP архива")
     @Test
     void excelFileParsingTest() throws Exception {
         File file = new File("src/test/resources/Файлы.zip");
@@ -85,6 +86,7 @@ public class ParsingFilesTest {
                 .isTrue();
     }
 
+    @DisplayName("Проверка csv-файла из ZIP архива")
     @Test
     void csvFileParsingTest() throws Exception {
         File file = new File("src/test/resources/Файлы.zip");
