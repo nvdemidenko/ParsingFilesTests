@@ -41,10 +41,6 @@ public class ParsingFilesTest {
                 assertThat(pdf.text).contains("Антуан де Сент-Экзюпери", "Маленький принц");
                 assertThat(pdf.numberOfPages).isBetween(1, 5);
 
-//                if (pdf.author != null) {
-//                    assertThat(pdf.author).containsIgnoringCase("Стивен Кинг");
-//                }
-
                 assertThat(pdf.text.trim()).isNotEmpty();
             }
         });
