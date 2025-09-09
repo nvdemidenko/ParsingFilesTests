@@ -12,18 +12,24 @@ import org.junit.jupiter.api.Test;
 import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ParsingFilesTest {
 
+    private File getResource(String fileName) throws URISyntaxException {
+        var url = ParsingFilesTest.class.getClassLoader().getResource(fileName);
+        if (url == null)
+            throw new AssertionError(String.format("Файл %s не найден", fileName));
+        return new File(url.toURI());
+    }
+
     @DisplayName("Проверка PDF-файла из ZIP архива")
     @Test
     void pdfFileParsingTest() throws Exception {
-        File file = new File("src/test/resources/Файлы.zip");
-
+        File file = getResource("Файлы.zip");
         AtomicBoolean pdfFound = new AtomicBoolean(false);
-
         ZipUtil.iterate(file, (entryStream, entry) -> {
             if (pdfFound.get()) return;
 
@@ -53,10 +59,8 @@ public class ParsingFilesTest {
     @DisplayName("Проверка excel-файла из ZIP архива")
     @Test
     void excelFileParsingTest() throws Exception {
-        File file = new File("src/test/resources/Файлы.zip");
-
+        File file = getResource("Файлы.zip");
         AtomicBoolean xlsxFound = new AtomicBoolean(false);
-
         ZipUtil.iterate(file, (entryStream, entry) -> {
             if (xlsxFound.get()) return;
 
@@ -89,11 +93,8 @@ public class ParsingFilesTest {
     @DisplayName("Проверка csv-файла из ZIP архива")
     @Test
     void csvFileParsingTest() throws Exception {
-        File file = new File("src/test/resources/Файлы.zip");
-
-        //ByteArrayOutputStream csvData = new ByteArrayOutputStream();
+        File file = getResource("Файлы.zip");
         AtomicBoolean csvFound = new AtomicBoolean(false);
-
         ZipUtil.iterate(file, (entryStream, entry) -> {
             if (csvFound.get()) return;
             if (entry.getName().toLowerCase().endsWith(".csv")) {
